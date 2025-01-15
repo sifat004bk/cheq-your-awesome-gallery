@@ -1,0 +1,44 @@
+# See https://www.dartlang.org/guides/libraries/private-files
+
+# Files and directories created by pub
+.dart_tool/
+.packages
+.pub/
+build/
+
+# Directory created by dartdoc
+# If you don't generate documentation locally you can remove this line.
+doc/api/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Visual Studio Code related
+.vscode/
+
+# flutter create
+.DS_Store
+.atom/
+.idea
+.packages
+.pub/
+build/
+ios/.generated/
+packages
+.flutter-plugins
+
+# Ignore eclipse buildship preferences files
+**/org.eclipse.buildship.core.prefs
+
+# FVM (https://github.com/leoafarias/fvm) related 
+# FVM Version Cache
+**/fvm
+# for newer versions
+.fvmrc
+.fvm/
+
+# ASDF tools manager (https://asdf-vm.com) related 
+**/.tool-versions
