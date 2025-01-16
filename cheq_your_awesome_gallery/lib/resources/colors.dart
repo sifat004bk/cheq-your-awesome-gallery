@@ -6,6 +6,7 @@ class AppColor {
   static Color buttonTextColor = const Color(0xff000000);
   static Color buttonFillColor = const Color(0xff66ffb6);
   static Color albumsHeaderColor = const Color(0xff363636);
+  static Color imageLayerColor = const Color(0xff212020);
   static Color white = const Color(0xffffffff);
   static Color black = const Color(0xff000000);
 }

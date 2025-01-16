@@ -9,6 +9,7 @@ class GridComponent extends StatelessWidget {
   final String? title;
   final int? count;
   final bool isAlbum;
+  final VoidCallback onTapAction;
 
   const GridComponent({
     super.key,
@@ -16,12 +17,13 @@ class GridComponent extends StatelessWidget {
     this.title,
     this.count,
     this.isAlbum = false,
+    required this.onTapAction,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTapAction,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Container(
@@ -36,7 +38,9 @@ class GridComponent extends StatelessWidget {
               Container(
                 height: double.infinity,
                 width: double.infinity,
-                color: AppColor.black.withValues(alpha: 0.5),
+                color: isAlbum
+                    ? AppColor.black.withValues(alpha: 0.5)
+                    : AppColor.imageLayerColor.withValues(alpha: 0.2),
               ),
               if (title != null && count != null)
                 _buildAlbumDetails(title!, count!),
@@ -62,7 +66,7 @@ class GridComponent extends StatelessWidget {
           ),
           const SizedBox(height: 3),
           Text(
-            '$imageCount photos',
+            '$imageCount Photos',
             style: AppTextStyles.imageCountStyle,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

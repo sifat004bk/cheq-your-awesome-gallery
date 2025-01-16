@@ -45,4 +45,11 @@ class AppTextStyles {
     fontWeight: FontWeight.w400,
     color: AppColor.white,
   );
+
+  static TextStyle appbarTextStyle = TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 20,
+    fontWeight: FontWeight.w400,
+    color: AppColor.black,
+  );
 }
