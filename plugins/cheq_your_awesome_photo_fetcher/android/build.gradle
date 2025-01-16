@@ -1,4 +1,4 @@
-group = "com.example.cheq_your_awesome_photo_fetcher"
+group = "com.sifat.cheq_your_awesome_photo_fetcher"
 version = "1.0-SNAPSHOT"
 
 buildscript {
@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:8.1.0")
+        classpath("com.android.tools.build:gradle:8.3.2")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
@@ -25,7 +25,7 @@ apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
 android {
-    namespace = "com.example.cheq_your_awesome_photo_fetcher"
+    namespace = "com.sifat.cheq_your_awesome_photo_fetcher"
 
     compileSdk = 35
 
@@ -50,6 +50,8 @@ android {
     dependencies {
         testImplementation("org.jetbrains.kotlin:kotlin-test")
         testImplementation("org.mockito:mockito-core:5.0.0")
+
+        implementation 'androidx.appcompat:appcompat:1.7.0'
     }
 
     testOptions {
