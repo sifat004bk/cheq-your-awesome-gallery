@@ -19,7 +19,7 @@ Map<String, dynamic> _$AlbumDataToJson(AlbumData instance) => <String, dynamic>{
     };
 
 ImageData _$ImageDataFromJson(Map<String, dynamic> json) => ImageData(
-      id: json['id'] as String,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
       path: json['path'] as String,
     );

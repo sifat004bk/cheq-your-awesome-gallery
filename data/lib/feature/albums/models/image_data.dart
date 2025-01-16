@@ -2,7 +2,7 @@ part of '../../../core/models.dart';
 
 @JsonSerializable()
 class ImageData {
-  final String id;
+  final int id;
   final String name;
   final String path;
 
