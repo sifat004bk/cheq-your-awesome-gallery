@@ -1,4 +1,4 @@
-package com.example.cheq_your_awesome_gallery
+package com.sifat.cheq_your_awesome_gallery
 
 import io.flutter.embedding.android.FlutterActivity
 

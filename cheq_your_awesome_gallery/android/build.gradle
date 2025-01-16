@@ -10,6 +10,17 @@ subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
 subprojects {
+    beforeEvaluate {
+        project ->
+            if (project.hasProperty("android")) {
+                android {
+                    def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')[0].toInteger()
+                    if (namespace == null && agpVersion >= 7) {
+                        namespace project.group
+                    }
+                }
+            }
+    }
     project.evaluationDependsOn(":app")
 }
 
