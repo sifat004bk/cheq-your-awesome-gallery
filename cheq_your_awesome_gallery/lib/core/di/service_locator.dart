@@ -1,6 +1,7 @@
 import 'package:cheq_your_awesome_gallery/core/di/service_locator.config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:data/data.dart' as dl;
 
 GetIt gi = GetIt.instance;
 
@@ -9,4 +10,8 @@ GetIt gi = GetIt.instance;
   preferRelativeImports: true,
   asExtension: true,
 )
-void configureServiceLocator() => gi.init();
+void configureServiceLocator() {
+  dl.DataInterfaceImpl().init();
+  gi.init();
+}
+
