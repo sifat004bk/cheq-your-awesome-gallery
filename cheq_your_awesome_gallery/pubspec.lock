@@ -142,6 +142,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  cheq_your_awesome_photo_fetcher:
+    dependency: transitive
+    description:
+      path: "../plugins/cheq_your_awesome_photo_fetcher"
+      relative: true
+    source: path
+    version: "0.0.1"
   clock:
     dependency: transitive
     description:
@@ -198,6 +205,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  dartz:
+    dependency: transitive
+    description:
+      name: dartz
+      sha256: e6acf34ad2e31b1eb00948692468c30ab48ac8250e0f0df661e29f12dd252168
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.10.1"
   data:
     dependency: "direct main"
     description:
