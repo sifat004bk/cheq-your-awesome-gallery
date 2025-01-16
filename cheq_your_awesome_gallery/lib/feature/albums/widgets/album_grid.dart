@@ -1,4 +1,4 @@
-import 'package:cheq_your_awesome_gallery/feature/albums/widgets/grid_component.dart';
+import 'package:cheq_your_awesome_gallery/feature/shared/widgets/grid_component.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 
