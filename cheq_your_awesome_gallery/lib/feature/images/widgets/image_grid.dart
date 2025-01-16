@@ -1,9 +1,11 @@
+import 'package:cheq_your_awesome_gallery/feature/images/screens/image_viewer_screen.dart';
 import 'package:cheq_your_awesome_gallery/feature/shared/widgets/grid_component.dart';
 import 'package:domain/feature/albums/entity/image.dart' as img;
 import 'package:flutter/material.dart';
 
 class ImageGrid extends StatelessWidget {
   final List<img.Image> images;
+
   const ImageGrid({super.key, required this.images});
 
   @override
@@ -17,8 +19,12 @@ class ImageGrid extends StatelessWidget {
       itemCount: images.length,
       itemBuilder: (context, index) {
         return GridComponent(
-         imagePath: images[index].path,
-          onTapAction: (){},
+          imagePath: images[index].path,
+          onTapAction: () {
+            Navigator.of(context).push(
+              ImageViewerScreen.route(images, index),
+            );
+          },
         );
       },
     );
