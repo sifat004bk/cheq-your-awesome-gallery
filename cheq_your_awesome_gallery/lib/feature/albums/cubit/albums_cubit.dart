@@ -11,8 +11,10 @@ class AlbumsCubit extends Cubit<AlbumsFetchState> {
   AlbumsCubit(this.useCase) : super(InitialAlbumsFetchState());
 
   Future<void> fetchAlbums() async {
+    if (isClosed) return;
     emit(AlbumsFetchInProgressState());
     final result = await useCase();
+    if (isClosed) return;
     result.fold(
       (albums) => emit(
         AlbumsFetchSuccessState(albums),
