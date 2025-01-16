@@ -23,7 +23,6 @@ class AlbumsScreen extends StatefulWidget {
 }
 
 class _AlbumsScreenState extends State<AlbumsScreen> {
-
   late AlbumsCubit albumsCubit;
 
   @override
@@ -38,6 +37,7 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
     albumsCubit.close();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,18 +46,21 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
         child: BlocBuilder<AlbumsCubit, AlbumsFetchState>(
           bloc: albumsCubit,
           builder: (context, state) {
-            if(state is AlbumsFetchSuccessState) {
-              return  Padding(
-                padding: const EdgeInsets.all(12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Albums', style: AppTextStyles.albumsHeaderStyle),
-                    const SizedBox(height: 8),
-                    Expanded(child: AlbumGrid(albums: state.albums)),
-                  ],
-                ),
-              );
+            switch (state) {
+              case AlbumsFetchSuccessState():
+                return Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Albums', style: AppTextStyles.albumsHeaderStyle),
+                      const SizedBox(height: 8),
+                      Expanded(child: AlbumGrid(albums: state.albums)),
+                    ],
+                  ),
+                );
+              case AlbumsFetchFailureState():
+                return Center(child: Text(state.failure.message));
             }
             return const SizedBox.shrink();
           },
