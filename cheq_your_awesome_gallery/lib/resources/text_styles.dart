@@ -24,4 +24,25 @@ class AppTextStyles {
     fontWeight: FontWeight.w500,
     color: AppColor.buttonTextColor,
   );
+
+  static TextStyle albumsHeaderStyle = TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 26,
+    fontWeight: FontWeight.w500,
+    color: AppColor.albumsHeaderColor,
+  );
+
+  static TextStyle albumTitleStyle = TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 20,
+    fontWeight: FontWeight.w400,
+    color: AppColor.white,
+  );
+
+  static TextStyle imageCountStyle = TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: AppColor.white,
+  );
 }
