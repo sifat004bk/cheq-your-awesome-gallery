@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   bloc: ^8.1.0
+  dartz: ^0.10.0
   data:
     path: ../data
   device_info_plus: ^11.2.0

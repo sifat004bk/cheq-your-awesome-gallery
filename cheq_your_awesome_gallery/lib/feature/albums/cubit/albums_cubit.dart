@@ -13,7 +13,6 @@ class AlbumsCubit extends Cubit<AlbumsFetchState> {
   Future<void> fetchAlbums() async {
     emit(AlbumsFetchInProgressState());
     final result = await useCase();
-    print('$result ucResult');
     result.fold(
       (albums) => emit(
         AlbumsFetchSuccessState(albums),
