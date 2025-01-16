@@ -4,6 +4,7 @@ import 'package:cheq_your_awesome_gallery/feature/albums/widgets/album_grid.dart
 import 'package:cheq_your_awesome_gallery/resources/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../../core/di/service_locator.dart';
 
@@ -47,7 +48,10 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
           bloc: albumsCubit,
           builder: (context, state) {
             switch (state) {
+              case AlbumsFetchInProgressState():
+                EasyLoading.show();
               case AlbumsFetchSuccessState():
+                EasyLoading.dismiss();
                 return Padding(
                   padding: const EdgeInsets.all(12),
                   child: Column(
@@ -60,6 +64,7 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
                   ),
                 );
               case AlbumsFetchFailureState():
+                EasyLoading.dismiss();
                 return Center(child: Text(state.failure.message));
             }
             return const SizedBox.shrink();
