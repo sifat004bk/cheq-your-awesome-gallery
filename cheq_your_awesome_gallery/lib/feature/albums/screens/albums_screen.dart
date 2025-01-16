@@ -1,9 +1,11 @@
 import 'package:cheq_your_awesome_gallery/feature/albums/cubit/albums_cubit.dart';
 import 'package:cheq_your_awesome_gallery/feature/albums/cubit/albums_fetch_state.dart';
+import 'package:cheq_your_awesome_gallery/feature/albums/widgets/album_grid.dart';
+import 'package:cheq_your_awesome_gallery/resources/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../core/di/service_locator.dart';
+import '../../../core/di/service_locator.dart';
 
 class AlbumsScreen extends StatefulWidget {
   const AlbumsScreen({super.key});
@@ -45,7 +47,17 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
           bloc: albumsCubit,
           builder: (context, state) {
             if(state is AlbumsFetchSuccessState) {
-              return  Text('${state.albums.length} albums found');
+              return  Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Albums', style: AppTextStyles.albumsHeaderStyle),
+                    const SizedBox(height: 8),
+                    Expanded(child: AlbumGrid(albums: state.albums)),
+                  ],
+                ),
+              );
             }
             return const SizedBox.shrink();
           },

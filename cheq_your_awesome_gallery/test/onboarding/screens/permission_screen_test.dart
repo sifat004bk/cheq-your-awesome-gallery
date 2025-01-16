@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:cheq_your_awesome_gallery/core/di/service_locator.dart';
-import 'package:cheq_your_awesome_gallery/feature/albums/albums_screen.dart';
+import 'package:cheq_your_awesome_gallery/feature/albums/screens/albums_screen.dart';
 import 'package:cheq_your_awesome_gallery/feature/onboarding/screens/permission_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

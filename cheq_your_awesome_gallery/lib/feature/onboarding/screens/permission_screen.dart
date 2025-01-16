@@ -1,5 +1,5 @@
 import 'package:cheq_your_awesome_gallery/core/di/service_locator.dart';
-import 'package:cheq_your_awesome_gallery/feature/albums/albums_screen.dart';
+import 'package:cheq_your_awesome_gallery/feature/albums/screens/albums_screen.dart';
 import 'package:cheq_your_awesome_gallery/resources/asset_helper.dart';
 import 'package:cheq_your_awesome_gallery/resources/colors.dart';
 import 'package:cheq_your_awesome_gallery/resources/text_styles.dart';
