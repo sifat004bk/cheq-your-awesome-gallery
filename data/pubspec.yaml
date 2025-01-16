@@ -7,6 +7,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  cheq_your_awesome_photo_fetcher:
+    path: ../plugins/cheq_your_awesome_photo_fetcher
   dartz: ^0.10.0
   domain:
     path: ../domain
