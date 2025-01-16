@@ -18,12 +18,35 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _bounceAnimationY;
 
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    );
+
+    _bounceAnimationY = Tween<double>(begin: 0, end: 15).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.bounceOut,
+      ),
+    )..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _animationController.reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          _animationController.forward();
+        }
+      });
+
+    _animationController.forward();
+
+    Timer(const Duration(seconds: 1), () {
       Navigator.pushReplacement(
         context,
         PermissionScreen.route(),
@@ -32,19 +55,23 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: TweenAnimationBuilder(
-          tween: Tween<double>(begin: 0.0, end: 1.0),
-          duration: const Duration(seconds: 2),
-          curve: Curves.easeIn,
-          builder: (context, double value, child) {
-            return Transform.scale(
-              scale: 1 + (value * 0.5),
+        child: AnimatedBuilder(
+          animation: _bounceAnimationY,
+          builder: (context, child) {
+            return Transform.translate(
+              offset: Offset(0.0, _bounceAnimationY.value),
               child: Opacity(
-                opacity: value,
+                opacity: 1.0,
                 child: child,
               ),
             );
