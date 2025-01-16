@@ -14,6 +14,7 @@ import 'package:domain/domain.dart' as _i494;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../feature/albums/cubit/albums_cubit.dart' as _i1020;
 import '../../feature/onboarding/cubit/permission_cubit.dart' as _i579;
 import 'app_dependencies.dart' as _i469;
 
@@ -34,6 +35,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => appDependencies.registerDataInterface());
     gh.singleton<_i494.FetchAlbumsUseCase>(
         () => appDependencies.fetchImageAlbums(gh<_i437.DataInterface>()));
+    gh.factory<_i1020.AlbumsCubit>(
+        () => _i1020.AlbumsCubit(gh<_i494.FetchAlbumsUseCase>()));
     return this;
   }
 }
