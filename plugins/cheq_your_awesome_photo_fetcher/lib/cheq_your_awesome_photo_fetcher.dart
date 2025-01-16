@@ -12,8 +12,19 @@ class CheqYourAwesomePhotoFetcher {
       final List<Map<String, dynamic>> castedAlbums = [];
 
       for (dynamic album in albums) {
-        Map<String, dynamic> castedData = album.cast<String, dynamic>();
-        castedAlbums.add(castedData);
+        Map<String, dynamic> castedAlum = album.cast<String, dynamic>();
+        final rawPhotos = castedAlum['photos'];
+        final List<Map<String, dynamic>> castedPhotos = [];
+
+        for(dynamic photo in rawPhotos){
+          Map<String, dynamic> castedPhoto = photo.cast<String, dynamic>();
+          castedPhotos.add(castedPhoto);
+        }
+
+        castedAlbums.add({
+          'albumName' : castedAlum['albumName'],
+          'photos' : castedPhotos
+        });
       }
       return castedAlbums;
     } on PlatformException catch (e) {
