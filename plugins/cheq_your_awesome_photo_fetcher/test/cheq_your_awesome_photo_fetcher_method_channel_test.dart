@@ -5,11 +5,14 @@ import 'package:cheq_your_awesome_photo_fetcher/cheq_your_awesome_photo_fetcher_
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  MethodChannelCheqYourAwesomePhotoFetcher platform = MethodChannelCheqYourAwesomePhotoFetcher();
-  const MethodChannel channel = MethodChannel('cheq_your_awesome_photo_fetcher');
+  MethodChannelCheqYourAwesomePhotoFetcher platform =
+      MethodChannelCheqYourAwesomePhotoFetcher();
+  const MethodChannel channel =
+      MethodChannel('cheq_your_awesome_photo_fetcher');
 
   setUp(() {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
       channel,
       (MethodCall methodCall) async {
         return '42';
@@ -18,7 +21,8 @@ void main() {
   });
 
   tearDown(() {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, null);
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(channel, null);
   });
 
   test('getPlatformVersion', () async {

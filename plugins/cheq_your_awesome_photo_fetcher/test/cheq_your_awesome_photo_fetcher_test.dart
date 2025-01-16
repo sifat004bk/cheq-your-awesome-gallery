@@ -1,29 +1,67 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:cheq_your_awesome_photo_fetcher/cheq_your_awesome_photo_fetcher.dart';
-import 'package:cheq_your_awesome_photo_fetcher/cheq_your_awesome_photo_fetcher_platform_interface.dart';
-import 'package:cheq_your_awesome_photo_fetcher/cheq_your_awesome_photo_fetcher_method_channel.dart';
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-class MockCheqYourAwesomePhotoFetcherPlatform
-    with MockPlatformInterfaceMixin
-    implements CheqYourAwesomePhotoFetcherPlatform {
-
-  @override
-  Future<String?> getPlatformVersion() => Future.value('42');
-}
+class MockMethodChannel extends Mock implements MethodChannel {}
 
 void main() {
-  final CheqYourAwesomePhotoFetcherPlatform initialPlatform = CheqYourAwesomePhotoFetcherPlatform.instance;
+  TestWidgetsFlutterBinding.ensureInitialized();
 
-  test('$MethodChannelCheqYourAwesomePhotoFetcher is the default instance', () {
-    expect(initialPlatform, isInstanceOf<MethodChannelCheqYourAwesomePhotoFetcher>());
-  });
+  group('CheqYourAwesomePhotoFetcher', () {
+    late MockMethodChannel mockChannel;
 
-  test('getPlatformVersion', () async {
-    CheqYourAwesomePhotoFetcher cheqYourAwesomePhotoFetcherPlugin = CheqYourAwesomePhotoFetcher();
-    MockCheqYourAwesomePhotoFetcherPlatform fakePlatform = MockCheqYourAwesomePhotoFetcherPlatform();
-    CheqYourAwesomePhotoFetcherPlatform.instance = fakePlatform;
+    setUp(() {
+      mockChannel = MockMethodChannel();
+      CheqYourAwesomePhotoFetcher.channel = mockChannel;
+    });
 
-    expect(await cheqYourAwesomePhotoFetcherPlugin.getPlatformVersion(), '42');
+    test('should return list of albums when method call is successful',
+        () async {
+      final mockAlbumsResponse = [
+        {
+          'albumName': 'Vacation',
+          'photos': [
+            {
+              'id': 1,
+              'name': 'photo1.jpg',
+              'path': '/photos/vacation/photo1.jpg'
+            },
+            {
+              'id': 2,
+              'name': 'photo2.jpg',
+              'path': '/photos/vacation/photo2.jpg'
+            }
+          ]
+        },
+        {
+          'albumName': 'Work',
+          'photos': [
+            {'id': 3, 'name': 'photo3.jpg', 'path': '/photos/work/photo3.jpg'}
+          ]
+        }
+      ];
+
+      when(() => mockChannel.invokeMethod('getPhotosByAlbum'))
+          .thenAnswer((_) async => mockAlbumsResponse);
+
+      final albums = await CheqYourAwesomePhotoFetcher().getPhotosByAlbum();
+
+      expect(albums.length, 2);
+      expect(albums[0]['albumName'], 'Vacation');
+      expect(albums[1]['albumName'], 'Work');
+      expect(albums[0]['photos'].length, 2);
+      expect(albums[1]['photos'].length, 1);
+    });
+
+    test('should throw an error when method call fails', () async {
+      when(() => mockChannel.invokeMethod('getPhotosByAlbum')).thenThrow(
+          PlatformException(code: 'ERROR', message: 'Failed to fetch photos'));
+
+      expect(
+          () async => await CheqYourAwesomePhotoFetcher().getPhotosByAlbum(),
+          throwsA(isA<String>().having(
+              (e) => e, 'message', contains('Failed to fetch photos'))));
+    });
   });
 }
